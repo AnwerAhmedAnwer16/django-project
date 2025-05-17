@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Categories
+
+
 # Create your views here.
 def listall(request):
-    return HttpResponse('<h1> this is list all view')
+    a = {'categories':Categories.objects.all()}
+    return render(request, 'categories/categories.html', a)

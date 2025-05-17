@@ -5,4 +5,5 @@ urlpatterns = [
     path('updating', updating ,name = 'updating'),
     path('adding', adding ,name = 'adding'),
     path('deleting', deleting ,name = 'deleting'),
+    path('test', test, name = 'test')
 ]

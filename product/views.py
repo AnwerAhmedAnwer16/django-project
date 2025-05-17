@@ -5,8 +5,10 @@ from django.shortcuts import render
 def listing(request):
     return HttpResponse('this is inserting')
 def adding(request):
-    return HttpResponse('this is adding')
-def updating(request):
-    return HttpResponse('this is updating')
+    return render(request, 'product/insert.html')
+def updating(request, id):
+    return render(request, 'product/update.html')
 def deleting(request):
     return HttpResponse('this is deleting')
+def test(request):
+    return render(request, 'product/productbase.html')

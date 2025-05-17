@@ -1,0 +1,14 @@
+{%extends 'parent.html'%}
+{%block title%}
+Categories
+{%endblock%}
+{%block content%}
+<h1>All Categories</h1>
+<ul>
+    {% for category in categories %}
+        <li>{{ category }} - {{ category.description }}</li>
+
+    {% endfor %}
+</ul>
+</select>
+{%endblock%}
