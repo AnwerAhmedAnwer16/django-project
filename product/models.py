@@ -9,6 +9,7 @@ class Product(models.Model):
     catid = models.ForeignKey(
         Categories,
         on_delete=models.CASCADE,
+        default = 1
     )
 
 
