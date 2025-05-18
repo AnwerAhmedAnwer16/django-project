@@ -5,6 +5,7 @@ Updating
 {%block content%}
     <h1>Update Product</h1>
     <form action="/submit-product/" method="POST" enctype="multipart/form-data">
+        {%crsf%}
         <label for="product_id">Product ID:</label><br>
         <input type="text" id="product_id" name="product_id" required><br><br>
 

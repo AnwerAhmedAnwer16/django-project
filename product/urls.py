@@ -4,6 +4,7 @@ urlpatterns = [
     path('listing', listing ,name = 'listing'),
     path('updating', updating ,name = 'updating'),
     path('adding', adding ,name = 'adding'),
-    path('deleting', deleting ,name = 'deleting'),
-    path('test', test, name = 'test')
+    path('hard/<int:id>', hardy, name = 'hard'),
+    path('soft/<int:id>', deleting, name = 'soft')
+
 ]

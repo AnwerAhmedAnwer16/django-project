@@ -1,27 +1,38 @@
-from itertools import product
-
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from django.shortcuts import render
-from django.template.context_processors import request
-from categories.models import *
-from .models import *
-# Create your views here.
+from categories.models import Categories
+from .models import Product
+
 def listing(request):
-    dict = {'products': product.object.all()}
-    return render(request, 'product/productbase', dict)
+    dict = {'products': Product.objects.filter(status=True)}
+    return render(request, 'product/productbase.html', dict)
+
 def adding(request):
     if request.method == 'POST':
-        if request.POST['name'] and request.FILES['img'] and request.POST['product_id']:
-            Product.objects.create(
-                name = request.POST['name'],
-                description = request.POST['description'],
-                price = request.POST['price'],
-                # catid =  Categories.objects.get(pk=request.POST['cat_id'])
+            prod=Product(
+                name=request.POST['name'],
+                description=request.POST['description'],
+                price=request.POST['price'],
+                stock=request.POST['stock'],
+                img=request.FILES['img'],
+                catid=Categories.objects.get(pk=request.POST['cat'])
             )
-    return render(request, 'product/insert.html')
+            prod.save()
+            print(request.POST['name'])
+            return redirect('listing')
+
+    cats = Categories.objects.all()
+    return render(request, 'product/insert.html', {'cats': cats})
 def updating(request, id):
-    return render(request, 'product/update.html')
-def deleting(request):
-    return HttpResponse('this is deleting')
-def test(request):
-    return render(request, 'product/productbase.html')
+    pass
+def deleting(request, id):
+    if request.method == 'POST':
+        p = Product.objects.get(id=id)
+        p.status = False
+        p.save()
+    return redirect('listing')
+
+def hardy(request, id):
+    if request.method == 'POST':
+        Product.objects.get(id=id).delete()
+    return redirect('listing')

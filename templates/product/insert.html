@@ -7,7 +7,6 @@ Inserting
     <form action="{% url 'adding' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 
-                {{ form.as_p }}
 
         <label for="product_id">Product ID:</label><br>
         <input type="text" id="product_id" name="product_id" required><br><br>
@@ -20,8 +19,10 @@ Inserting
 
         <label for="price">Price ($):</label><br>
         <input type="number" id="price" name="price" step="0.01" required><br><br>
+        <label for="price">stock :</label><br>
+        <input type="number" id="stock" name="stock" step="1" required><br><br>
         <label for="cat_id">category id:</label><br>
-        <input type="number" id="cat_id" name="price"  required><br><br>
+        <input type="number" id="cat_id" name="cat"  required><br><br>
 
         <label for="img">Image:</label><br>
         <input type="file" id="img" name="img" accept="image/*" required><br><br>

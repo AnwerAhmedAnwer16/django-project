@@ -6,7 +6,7 @@ Categories
 <h1>All Categories</h1>
 <ul>
     {% for category in categories %}
-        <li>{{ category }} - {{ category.description }}</li>
+        <li>{{ category.name }} - {{ category.description }}</li>
 
     {% endfor %}
 </ul>
