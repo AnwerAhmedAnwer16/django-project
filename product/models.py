@@ -5,7 +5,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    img = models.ImageField(upload_to='products/', blank=True, default=1)
+    img = models.ImageField(upload_to='product/', blank=True, default=1)
     stock = models.IntegerField(default=1)
     catid = models.ForeignKey(
         to=Categories,

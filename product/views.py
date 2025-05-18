@@ -23,7 +23,7 @@ def adding(request):
 
     cats = Categories.objects.all()
     return render(request, 'product/insert.html', {'cats': cats})
-def updating(request, id):
+def updating(request):
     pass
 def deleting(request, id):
     p = get_object_or_404(Product ,id = id)

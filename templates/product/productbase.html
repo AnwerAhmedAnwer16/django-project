@@ -1,13 +1,55 @@
-{%extends 'parent.html'%}
-{%block title%}
-Products
-{%endblock%}
-{%block content%}
-<h1>All Products</h1>
-<ul>
-    {% for product in products %}
-        <li>{{ product.name }}   - {{ product.description }} - {{ product.price }} -     <img src=/media/"{{ product.image}}" class="card-img-top" alt="{{ product.name }}"></li>
-    {% endfor %}
-</ul>
+{% extends 'parent.html' %}
 
-{%endblock%}
+{% block title %}
+    Products
+{% endblock %}
+
+{% block content %}
+<h1>All Products</h1>
+
+<a href="{% url 'adding' %}" class="btn btn-success mb-3">
+    <i class="fas fa-plus me-2"></i> Add Product
+</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <p>{{ product.image.url }}</p>  <!-- Debugging the URL -->
+
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="width: 50px; height: 50px; object-fit: cover;">
+                </td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'updating' %}" class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit me-2"></i> Update
+                        </a>
+
+                        <a href="{% url 'hard' product.id %}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt me-2"></i> Hard Delete
+                        </a>
+
+                        <a href="{% url 'soft' product.id %}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-trash me-2"></i> Soft Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
