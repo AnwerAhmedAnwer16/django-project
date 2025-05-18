@@ -8,8 +8,8 @@ Inserting
             {% csrf_token %}
 
 
-        <label for="product_id">Product ID:</label><br>
-        <input type="text" id="product_id" name="product_id" required><br><br>
+<!--        <label for="product_id">Product ID:</label><br>-->
+<!--        <input type="text" id="product_id" name="product_id" required><br><br>-->
 
         <label for="name">Name:</label><br>
         <input type="text" id="name" name="name" required><br><br>
@@ -21,8 +21,13 @@ Inserting
         <input type="number" id="price" name="price" step="0.01" required><br><br>
         <label for="price">stock :</label><br>
         <input type="number" id="stock" name="stock" step="1" required><br><br>
-        <label for="cat_id">category id:</label><br>
-        <input type="number" id="cat_id" name="cat"  required><br><br>
+                   <select id="catid" name="catid" class="form-select" required>
+                <option value="" disabled selected>Select a category</option>
+                {% for category in cats %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+
 
         <label for="img">Image:</label><br>
         <input type="file" id="img" name="img" accept="image/*" required><br><br>

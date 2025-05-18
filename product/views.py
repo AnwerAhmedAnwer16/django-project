@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from categories.models import Categories
 from .models import Product
@@ -15,7 +15,7 @@ def adding(request):
                 price=request.POST['price'],
                 stock=request.POST['stock'],
                 img=request.FILES['img'],
-                catid=Categories.objects.get(pk=request.POST['cat'])
+                catid=Categories.objects.get(pk=request.POST['catid'])
             )
             prod.save()
             print(request.POST['name'])
@@ -26,13 +26,12 @@ def adding(request):
 def updating(request, id):
     pass
 def deleting(request, id):
-    if request.method == 'POST':
-        p = Product.objects.get(id=id)
-        p.status = False
-        p.save()
+    p = get_object_or_404(Product ,id = id)
+    p.status = False
+    p.save()
     return redirect('listing')
 
 def hardy(request, id):
-    if request.method == 'POST':
-        Product.objects.get(id=id).delete()
+    print(id)
+    Product.objects.filter(id=id).delete()
     return redirect('listing')

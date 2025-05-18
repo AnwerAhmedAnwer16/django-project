@@ -6,7 +6,7 @@ Products
 <h1>All Products</h1>
 <ul>
     {% for product in products %}
-        <li>{{ product.name }} - {{ product.description }} - {{ product.price }} </li>
+        <li>{{ product.name }}   - {{ product.description }} - {{ product.price }} -     <img src=/media/"{{ product.image}}" class="card-img-top" alt="{{ product.name }}"></li>
     {% endfor %}
 </ul>
 
