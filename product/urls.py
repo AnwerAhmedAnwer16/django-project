@@ -1,10 +1,15 @@
 from django.urls import path
 from .views import *
+from . import views
 urlpatterns = [
     path('listing', listing ,name = 'listing'),
     path('updating/<int:id>', updating ,name = 'updating'),
     path('adding', adding ,name = 'adding'),
     path('hard/<int:id>', hardy, name = 'hard'),
-    path('soft/<int:id>', deleting, name = 'soft')
+    path('soft/<int:id>', deleting, name = 'soft'),
+    path('new/', addingf, name = 'new'),
+    path('neww/<int:id>', updatingf, name = 'neww'),
+    path('listingf/', views.Listingcbv.as_view(), name = 'listo'),
+    path('delel/<int:id>', views.Deletingcbv.as_view(), name = 'deleo'),
 
 ]

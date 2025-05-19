@@ -1,0 +1,12 @@
+{% extends 'parent.html' %}
+{% block title %}
+    new
+{% endblock %}
+{% block content %}
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+</form>
+
+{% endblock %}
