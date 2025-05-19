@@ -36,7 +36,7 @@ def updating(request, id):
         oldy.stock = request.POST['stock']
         oldy.catid = Categories.getbyid(request.POST['catid'])
         oldy.img = request.FILES['stock']
-        oldy.update()
+        oldy.save()
     return render(request, 'product/update.html', context)
 
 
