@@ -1,26 +1,42 @@
 {%extends 'parent.html'%}
 {%block title%}
-Updating
+Inserting
 {%endblock%}
 {%block content%}
-    <h1>Update Product</h1>
-    <form action="/submit-product/" method="POST" enctype="multipart/form-data">
-        {%crsf%}
-        <label for="product_id">Product ID:</label><br>
-        <input type="text" id="product_id" name="product_id" required><br><br>
+    <h1>Insert Product</h1>
+    <form action="{% url 'adding' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+
+<!--        <label for="product_id">Product ID:</label><br>-->
+<!--        <input type="text" id="product_id" name="product_id" required><br><br>-->
 
         <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
+        <input type="text" value="{{oldobj.name}}" id="name" name="name" required><br><br>
 
         <label for="description">Description:</label><br>
-        <textarea id="description" name="description" required></textarea><br><br>
+        <textarea id="description"  name="description" required></textarea><br><br>
 
         <label for="price">Price ($):</label><br>
-        <input type="number" id="price" name="price" step="0.01" required><br><br>
+        <input type="number"  value="{{oldobj.price}}" id="price" name="price" step="0.01" required><br><br>
+        <label for="price">stock :</label><br>
+        <input type="number" id="stock" value="{{oldobj.stock}}" name="stock" step="1" required><br><br>
+        <select id="catid" name="catid" class="form-select" required>
+<!--                <option value="" disabled selected>Select a category</option>-->
+                {% for category in cats %}
+                {% if category.id == oldobj.catid.id %}
+                     <option selected value="{{ category.id }}">{{ category.name }}</option>
+                {%else%}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {%endif%}
+                {% endfor %}
+            </select>
+
 
         <label for="img">Image:</label><br>
-        <input type="file" id="img" name="img" accept="image/*" required><br><br>
 
-        <button type="submit">Submit Product</button>
+        <input type="file" id="img" name="img" accept="image/*" required><br><br>
+        <img src="/media/{{oldobj.img}}" width="90px"><br><br>
+        <button type="submit">Update Product</button>
     </form>
 {%endblock%}

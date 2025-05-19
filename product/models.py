@@ -13,6 +13,9 @@ class Product(models.Model):
        )
     status = models.BooleanField(default=True)
 
+    @classmethod
+    def getbyid(cls,id):
+        return cls.objects.get(pk=id)
 
     def __str__(self):
         return self.name

@@ -6,5 +6,9 @@ class Categories(models.Model):
     description = models.TextField(blank=True)
     def __str__(self):
         return self.name
+    @classmethod
+    def getbyid(cls,id):
+        a = cls.objects.get(pk=id)
+        return a.id
 
 

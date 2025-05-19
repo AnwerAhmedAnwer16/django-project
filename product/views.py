@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.template.context_processors import request
+
 from categories.models import Categories
 from .models import Product
 
@@ -23,8 +25,21 @@ def adding(request):
 
     cats = Categories.objects.all()
     return render(request, 'product/insert.html', {'cats': cats})
-def updating(request):
-    pass
+
+def updating(request, id):
+    context ={'oldobj':Product.getbyid(id), 'cats':Categories.objects.all()}
+    if request.method == 'Post':
+        oldy = Product.getbyid(id)
+        oldy.name = request.POST['name']
+        oldy.description = request.POST['description']
+        oldy.price = request.POST['price']
+        oldy.stock = request.POST['stock']
+        oldy.catid = Categories.getbyid(request.POST['catid'])
+        oldy.img = request.FILES['stock']
+        oldy.update()
+    return render(request, 'product/update.html', context)
+
+
 def deleting(request, id):
     p = get_object_or_404(Product ,id = id)
     p.status = False
