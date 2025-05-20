@@ -18,3 +18,9 @@ class Adding(CreateView):
     fields = ['name', 'description']
     success_url = reverse_lazy('category-list')
 
+class Updating(UpdateView):
+    model = Categories
+    template_name = 'categories/form.html'
+    fields = ['name', 'description']
+    context_object_name = 'category'
+    success_url = reverse_lazy('category-list')
