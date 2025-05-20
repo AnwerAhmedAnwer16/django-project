@@ -11,3 +11,10 @@ class Listing(ListView):
     model = Categories
     template_name = 'categories/list.html'
     context_object_name = 'categories'
+
+class Adding(CreateView):
+    model = Categories
+    template_name = 'categories/form.html'
+    fields = ['name', 'description']
+    success_url = reverse_lazy('category-list')
+
