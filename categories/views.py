@@ -9,5 +9,5 @@ def listall(request):
     return render(request, 'categories/categories.html', a)
 class Listing(ListView):
     model = Categories
-    template_name = 'category/list.html'
+    template_name = 'categories/list.html'
     context_object_name = 'categories'
