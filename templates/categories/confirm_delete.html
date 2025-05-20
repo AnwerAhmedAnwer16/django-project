@@ -1,10 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "parent.html" %}
 
-</body>
-</html>
+{% block content %}
+<div class="container">
+    <h2>Delete Category</h2>
+    
+    <div class="alert alert-danger">
+        <p>Are you sure to delete  "{{ category.name }}"?</p>
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'category-list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}
