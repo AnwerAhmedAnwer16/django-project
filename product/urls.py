@@ -10,6 +10,6 @@ urlpatterns = [
     path('new/', addingf, name = 'new'),
     path('neww/<int:id>', updatingf, name = 'neww'),
     path('listingf/', views.Listingcbv.as_view(), name = 'listo'),
-    path('delel/<int:id>', views.Deletingcbv.as_view(), name = 'deleo'),
+    path('delel/<int:pk>', views.Deletingcbv.as_view(), name = 'deleo'),
 
 ]

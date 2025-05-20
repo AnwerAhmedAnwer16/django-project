@@ -75,15 +75,22 @@ def updatingf(request,id):
         form = ProductForm(instance=product)
     return render(request, 'product/neww.html', {'form': form})
 
-class Listingcbv(ListView):
-    model = Product
-    template_name = 'product/listingcbv.html'
-    context_object_name = 'products'
 
-    def get_queryset(self):
-        return Product.objects.filter(status=True)
-# views.py
-class Deletingcbv(DeleteView):
-    model = Product
-    template_name = 'product/dele.html'
-    success_url = reverse_lazy('listing')
+class Listingcbv(View):
+    def get(self, request):
+        products = Product.objects.filter(status=True)
+        context = {
+            'products': products
+        }
+        return render(request, 'product/listingcbv.html', context)
+
+
+class Deletingcbv(View):
+    def get(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        return render(request, 'product/dele.html', {'product': product})
+
+    def post(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        product.delete()
+        return redirect('listing')
