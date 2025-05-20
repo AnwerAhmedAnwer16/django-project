@@ -4,6 +4,44 @@
 {% endblock %}
 {% block content %}
 <h1>my products</h1>
-    {{ form.as_p }}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for product in products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.price }}</td>
+                <td>
+                    <img src="/media/{{ product.img }}" class="card-img-top" alt="{{ product.name }}" style="width: 50px; height: 50px; object-fit: cover;">
+                </td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a href="{% url 'updating' product.id %}"  class="btn btn-primary btn-sm">
+                            <i class="fas fa-edit me-2"></i> Update
+                        </a>
+
+                        <a href="{% url 'hard' product.id %}" class="btn btn-danger btn-sm">
+                            <i class="fas fa-trash-alt me-2"></i> Hard Delete
+                        </a>
+
+                        <a href="{% url 'soft' product.id %}" class="btn btn-warning btn-sm">
+                            <i class="fas fa-trash me-2"></i> Soft Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}
