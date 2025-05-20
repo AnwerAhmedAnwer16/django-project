@@ -87,8 +87,6 @@ class Listingcbv(View):
 
 class Deletingcbv(View):
     def get(self, request, pk):
-        # Get the product and delete it directly
         product = Product.objects.get(pk=pk)
         product.delete()
-        # Redirect back to the listing page
         return redirect('listing')
