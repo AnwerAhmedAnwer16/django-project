@@ -24,3 +24,9 @@ class Updating(UpdateView):
     fields = ['name', 'description']
     context_object_name = 'category'
     success_url = reverse_lazy('category-list')
+
+class CategoryDeleteView(DeleteView):
+    model = Categories
+    template_name = 'Categories/confirm_delete.html'
+    context_object_name = 'category'
+    success_url = reverse_lazy('category-list')
