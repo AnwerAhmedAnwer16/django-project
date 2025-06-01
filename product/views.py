@@ -162,4 +162,8 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
+    def delete(self, request, *args, **kwargs):
+        product = self.get_object()
+        product.delete()
+        return Response(status=204)
 
