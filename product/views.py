@@ -146,10 +146,8 @@ class ProductUpdateView(UpdateAPIView):
 
 
 class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
-    # Tell Django what data we're working with
     all_products = Product.objects.all()
     product_serializer = ProductSerializer
+    lookup_field = 'id'
 
-    # How to find a specific product (by ID)
-    lookup_field = 'id'  # We'll use URLs like /products/1/
 
