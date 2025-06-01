@@ -171,3 +171,10 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
 class ProductViewSet(viewsets.ModelViewSet):
     all_products = Product.objects.all()
     how_to_serialize = ProductSerializer
+
+    def create(self, request):
+        serializer = self.how_to_serialize(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
