@@ -150,4 +150,8 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
     product_serializer = ProductSerializer
     lookup_field = 'id'
 
+    def get(self, request, *args, **kwargs):
+        product = self.get_object()
+        serializer = self.product_serializer(product)
+        return Response(serializer.data)
 
