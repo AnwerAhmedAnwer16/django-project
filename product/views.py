@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template.context_processors import request
+from rest_framework import viewsets
 from rest_framework import generics
 from django.views.generic import *
 from django.urls import reverse_lazy
@@ -167,3 +168,6 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
         product.delete()
         return Response(status=204)
 
+class ProductViewSet(viewsets.ModelViewSet):
+    all_products = Product.objects.all()
+    how_to_serialize = ProductSerializer
