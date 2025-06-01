@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.template.context_processors import request
+from rest_framework import generics
 from django.views.generic import *
 from django.urls import reverse_lazy
 from rest_framework.decorators import api_view, permission_classes
@@ -142,3 +143,13 @@ class ProductUpdateView(UpdateAPIView):
             'message': 'Product updated successfully',
             'data': serializer.data
         })
+
+
+class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
+    # Tell Django what data we're working with
+    all_products = Product.objects.all()
+    product_serializer = ProductSerializer
+
+    # How to find a specific product (by ID)
+    lookup_field = 'id'  # We'll use URLs like /products/1/
+
