@@ -17,11 +17,18 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
+from rest_framework.routers import SimpleRouter
+from .views import ProductViewSet
 from django.conf.urls.static import static
+router = SimpleRouter()
+router.register('products', ProductViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('categories/', include('categories.urls')),
     path('product/', include('product.urls')),path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('', include(router.urls)),
+ ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+router = SimpleRouter()
+router.register('products', ProductViewSet)
