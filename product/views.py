@@ -154,4 +154,12 @@ class ProductDetailView(generics.RetrieveUpdateDestroyAPIView):
         product = self.get_object()
         serializer = self.product_serializer(product)
         return Response(serializer.data)
+    def put(self, request, *args, **kwargs):
+        product = self.get_object()
+        serializer = self.product_serializer(product, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
 
