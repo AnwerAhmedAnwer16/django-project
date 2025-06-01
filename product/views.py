@@ -1,7 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.template.context_processors import request
 from django.views.generic import *
 from django.urls import reverse_lazy
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.response import Response
+from rest_framework import status, permissions
+from .models import Product
+from .serializers import ProductSerializer
+from rest_framework.generics import UpdateAPIView
+from rest_framework.permissions import IsAuthenticated
+from .models import Product
 from .serializers import ProductSerializer
 from rest_framework.response import Response
 
@@ -118,3 +127,23 @@ def product_list_create(request):
             'success': False,
             'errors': serializer.errors
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class ProductUpdateView(UpdateAPIView):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = 'id'  # or 'pk' if you prefer
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        return Response({
+            'status': 'success',
+            'message': 'Product updated successfully',
+            'data': serializer.data
+        })
