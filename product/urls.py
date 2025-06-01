@@ -13,5 +13,6 @@ urlpatterns = [
     path('delel/<int:pk>', views.Deletingcbv.as_view(), name = 'deleo'),
     path('products/', product_list_create, name='product-list-create'),
     path('products/<int:id>/update/', ProductUpdateView.as_view(), name='product-update'),
+    path('products/<int:id>/', ProductDetailView.as_view()),
 
 ]
