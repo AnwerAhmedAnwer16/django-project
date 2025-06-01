@@ -1,13 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from django.template.context_processors import request
 from django.views.generic import *
 from django.urls import reverse_lazy
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-from rest_framework import status, permissions
-from .models import Product
 from .serializers import ProductSerializer
+from rest_framework.response import Response
+
 
 from product.forms import *
 from categories.models import Categories
