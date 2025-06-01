@@ -6,13 +6,10 @@ from django.urls import reverse_lazy
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import status, permissions
-from .models import Product
 from rest_framework.generics import UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from .serializers import ProductSerializer
 from rest_framework.response import Response
-
-
 from product.forms import *
 from categories.models import Categories
 from .models import Product
